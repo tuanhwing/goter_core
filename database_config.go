@@ -11,6 +11,11 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
+///GetDBName return database name
+func GetDBName() string {
+	return os.Getenv("DB_NAME")
+}
+
 func SetupDatabaseConnection() *mongo.Client {
 
 	dataSourceName := fmt.Sprintf(
