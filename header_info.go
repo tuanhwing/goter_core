@@ -1,6 +1,8 @@
 package gotercore
 
-import "context"
+import (
+	"context"
+)
 
 const (
 	KeyHeaderInfo string = "header_info"
@@ -31,4 +33,15 @@ func GetHeaderInfo(ctx context.Context) HeaderInfo {
 	return &headerInfoData{
 		LanguageCode: "vi",
 	}
+}
+
+func IsLanguageSupported(lang string) bool {
+	supportsLanguages := []string{"vi", "en"}
+	for _, v := range supportsLanguages {
+		if v == lang {
+			return true
+		}
+	}
+
+	return false
 }
