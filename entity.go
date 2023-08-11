@@ -17,12 +17,12 @@ const (
 
 type User struct {
 	ID         primitive.ObjectID `bson:"_id" json:"id"`
-	Name       *string            `json:"name"`
-	Address    *string            `json:"address"`
-	Gender     *string            `json:"gender"`
-	Avatar     *string            `json:"avatar"`
+	Name       string             `json:"name"`
+	Address    string             `json:"address"`
+	Gender     string             `json:"gender"`
+	Avatar     string             `json:"avatar"`
 	RoleType   RoleType           `bson:"role_type" json:"role_type"`
-	DayOfBirth *string            `bson:"day_of_birth" json:"day_of_birth"`
+	DayOfBirth string             `bson:"day_of_birth" json:"day_of_birth"`
 	Phone      PhoneNumber        `json:"phone"`
 	CreatedAt  time.Time          `bson:"created_at" json:"-"`
 	UpdatedAt  time.Time          `bson:"updated_at" json:"-"`
@@ -40,7 +40,7 @@ func NewUser(dialCode, phone string) (*User, error) {
 	u := &User{
 		ID:        primitive.NewObjectID(),
 		Phone:     *p,
-		Name:      &defaultName,
+		Name:      defaultName,
 		RoleType:  GuestRole,
 		CreatedAt: time.Now(),
 		UpdatedAt: time.Now(),
@@ -85,8 +85,8 @@ func (user *User) Brief() interface{} {
 		RoleType RoleType           `bson:"role_type" json:"role_type"`
 	}{
 		ID:       user.ID,
-		Name:     user.Name,
-		Avatar:   user.Avatar,
+		Name:     &user.Name,
+		Avatar:   &user.Avatar,
 		RoleType: user.RoleType,
 	}
 
