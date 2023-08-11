@@ -9,18 +9,23 @@ const (
 	UnauthorizedErrorCode           = 4
 )
 
-type Response struct {
-	Status  bool        `json:"status"`
-	Error   interface{} `json:"error"`
-	Message string      `json:"message"`
-	Data    interface{} `json:"data"`
+type ErrorReponse struct {
+	ErrorCode int         `json:"error_code"`
+	Errors    interface{} `json:"errors"`
+}
+
+type Response[T any] struct {
+	Status  bool         `json:"status"`
+	Error   ErrorReponse `json:"error"`
+	Message string       `json:"message"`
+	Data    T            `json:"data"`
 }
 
 type EmptyObj struct {
 }
 
-func BuildResponse(status bool, message string, data interface{}) Response {
-	res := Response{
+func BuildResponse[T any](status bool, message string, data T) Response[T] {
+	res := Response[T]{
 		Status:  status,
 		Message: message,
 		Data:    data,
@@ -28,17 +33,14 @@ func BuildResponse(status bool, message string, data interface{}) Response {
 	return res
 }
 
-func BuildErrorResponse(code int, message, errMessages string, data interface{}) Response {
+func BuildErrorResponse[T any](code int, message, errMessages string, data T) Response[T] {
 	splittedError := strings.Split(errMessages, "\n")
-	err := struct {
-		ErrorCode int         `json:"error_code"`
-		Errors    interface{} `json:"errors"`
-	}{
+	err := ErrorReponse{
 		ErrorCode: code,
 		Errors:    splittedError,
 	}
 
-	res := Response{
+	res := Response[T]{
 		Status:  false,
 		Error:   err,
 		Message: message,
@@ -47,13 +49,13 @@ func BuildErrorResponse(code int, message, errMessages string, data interface{})
 	return res
 }
 
-var NotFoundTokenResponse = BuildErrorResponse(
+var NotFoundTokenResponse = BuildErrorResponse[interface{}](
 	TokenNotFoundErrorCode,
 	"Token not found",
 	"Failed to proccess request",
 	nil)
 
-var UnauthorizedResponse = BuildErrorResponse(
+var UnauthorizedResponse = BuildErrorResponse[interface{}](
 	UnauthorizedErrorCode,
 	"Token invalid or expired",
 	"Failed to proccess request",
