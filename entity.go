@@ -15,7 +15,7 @@ const (
 	AdminRole   RoleType = 0
 )
 
-type User struct {
+type UserEntity struct {
 	ID         primitive.ObjectID `bson:"_id" json:"id"`
 	Name       string             `json:"name"`
 	Address    string             `json:"address"`
@@ -29,7 +29,7 @@ type User struct {
 }
 
 //NewUser create a new user
-func NewUser(dialCode, phone string) (*User, error) {
+func NewUser(dialCode, phone string) (*UserEntity, error) {
 	p, err := NewPhoneNumber(dialCode, phone)
 	defaultName := "Goter"
 
@@ -37,7 +37,7 @@ func NewUser(dialCode, phone string) (*User, error) {
 		return nil, err
 	}
 
-	u := &User{
+	u := &UserEntity{
 		ID:        primitive.NewObjectID(),
 		Phone:     *p,
 		Name:      defaultName,
@@ -53,7 +53,7 @@ func NewUser(dialCode, phone string) (*User, error) {
 }
 
 //Validate  data
-func (u *User) Validate() error {
+func (u *UserEntity) Validate() error {
 	return nil
 }
 
@@ -77,7 +77,7 @@ func (role RoleType) String() string {
 }
 
 //Return brief user information
-func (user *User) Brief() interface{} {
+func (user *UserEntity) Brief() interface{} {
 	briefInfo := struct {
 		ID       primitive.ObjectID `json:"id"`
 		Name     *string            `json:"name"`
