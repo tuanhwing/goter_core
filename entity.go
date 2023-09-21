@@ -80,13 +80,13 @@ func (role RoleType) String() string {
 func (user *UserEntity) Brief() interface{} {
 	briefInfo := struct {
 		ID       primitive.ObjectID `json:"id"`
-		Name     *string            `json:"name"`
-		Avatar   *string            `json:"avatar"`
+		Name     string             `json:"name"`
+		Avatar   string             `json:"avatar"`
 		RoleType RoleType           `bson:"role_type" json:"role_type"`
 	}{
 		ID:       user.ID,
-		Name:     &user.Name,
-		Avatar:   &user.Avatar,
+		Name:     user.Name,
+		Avatar:   user.Avatar,
 		RoleType: user.RoleType,
 	}
 
