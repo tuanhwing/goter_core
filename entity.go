@@ -15,6 +15,13 @@ const (
 	AdminRole   RoleType = 0
 )
 
+type FileEntity struct {
+	Key          string `bson:"key" json:"key"`
+	Type         string `bson:"type" json:"type"` //value = image/video
+	OriginUrl    string `bson:"origin_url" json:"origin_url"`
+	ThumbnailUrl string `bson:"omitempty" json:"thumbnail_url"`
+}
+
 type UserEntity struct {
 	ID         primitive.ObjectID `bson:"_id" json:"id"`
 	Name       string             `json:"name"`
