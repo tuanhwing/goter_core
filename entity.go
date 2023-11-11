@@ -10,9 +10,9 @@ import (
 type RoleType int
 
 const (
-	GuestRole   RoleType = 2
-	ManagerRole RoleType = 1
-	AdminRole   RoleType = 0
+	AdminRole   RoleType = 20
+	ManagerRole RoleType = 10
+	GuestRole   RoleType = 0
 )
 
 type FileEntity struct {
