@@ -22,6 +22,14 @@ type FileEntity struct {
 	ThumbnailUrl string `bson:"omitempty" json:"thumbnail_url"`
 }
 
+type DeviceInfoEntity struct {
+	DeviceCode  string `json:"device_code,omitempty" bson:"device_code,omitempty"`
+	DeviceModel string `json:"device_model,omitempty" bson:"device_model,omitempty"`
+	OSName      string `json:"os_name,omitempty" bson:"os_name,omitempty"`
+	OSVersion   string `json:"os_version,omitempty" bson:"os_version,omitempty"`
+	AppVersion  string `json:"app_version,omitempty" bson:"app_version,omitempty"`
+}
+
 type UserEntity struct {
 	ID         primitive.ObjectID `bson:"_id" json:"id"`
 	Name       string             `json:"name"`
