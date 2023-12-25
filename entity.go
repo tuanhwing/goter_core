@@ -19,7 +19,7 @@ type FileEntity struct {
 	Key          string `bson:"key" json:"key"`
 	Type         string `bson:"type" json:"type"` //value = image/video
 	OriginUrl    string `bson:"origin_url" json:"origin_url"`
-	ThumbnailUrl string `bson:"omitempty" json:"thumbnail_url"`
+	ThumbnailUrl string `bson:"thumbnail_url,omitempty" json:"thumbnail_url"`
 }
 
 type DeviceInfoEntity struct {
