@@ -71,3 +71,9 @@ func ParseAppVersion(s string) [4]int {
 
 	return results
 }
+
+func ParseDeviceInfo(s string) (DeviceInfoEntity, error) {
+	var data DeviceInfoEntity
+	err := json.Unmarshal([]byte(s), &data)
+	return data, err
+}
