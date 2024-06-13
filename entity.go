@@ -22,7 +22,7 @@ type FileEntity struct {
 	ThumbnailUrl string `bson:"thumbnail_url,omitempty" json:"thumbnail_url"`
 }
 
-type DeviceInfoEntity struct {
+type DeviceInfoHeaderRequest struct {
 	DeviceCode  string `json:"device_code,omitempty" bson:"device_code,omitempty"`
 	DeviceModel string `json:"device_model,omitempty" bson:"device_model,omitempty"`
 	OSName      string `json:"os_name,omitempty" bson:"os_name,omitempty"`
@@ -43,7 +43,7 @@ type UserEntity struct {
 	UpdatedAt  time.Time          `bson:"updated_at" json:"-"`
 }
 
-//NewUser create a new user
+// NewUser create a new user
 func NewUser(dialCode, phone string) (*UserEntity, error) {
 	p, err := NewPhoneNumber(dialCode, phone)
 	defaultName := "Goter"
@@ -67,12 +67,12 @@ func NewUser(dialCode, phone string) (*UserEntity, error) {
 	return u, nil
 }
 
-//Validate  data
+// Validate  data
 func (u *UserEntity) Validate() error {
 	return nil
 }
 
-//Get name with role type
+// Get name with role type
 func (role RoleType) String() string {
 	// list of role names
 	names := [...]string{
@@ -91,7 +91,7 @@ func (role RoleType) String() string {
 
 }
 
-//Return brief user information
+// Return brief user information
 func (user *UserEntity) Brief() interface{} {
 	briefInfo := struct {
 		ID       primitive.ObjectID `json:"id"`
@@ -114,7 +114,7 @@ type PhoneNumber struct {
 	FullPhoneNumber string `json:"full_phone_number" bson:"full_phone_number"`
 }
 
-//NewPhoneNumber create a new user
+// NewPhoneNumber create a new user
 func NewPhoneNumber(dialCode, phoneNumber string) (*PhoneNumber, error) {
 	p := &PhoneNumber{
 		DialCode:        dialCode,
@@ -128,7 +128,7 @@ func NewPhoneNumber(dialCode, phoneNumber string) (*PhoneNumber, error) {
 	return p, nil
 }
 
-//Validate  data
+// Validate  data
 func (p *PhoneNumber) Validate() error {
 	re := regexp.MustCompile(`\+[1-9][0-9]{6,12}`)
 	phoneNumber := p.DialCode + p.PhoneNumber

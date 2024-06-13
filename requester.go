@@ -11,20 +11,20 @@ type Requester interface {
 	GetTokenId() string
 	GetRole() int
 	GetLanguageCode() string
-	GetDeviceInfo() DeviceInfoEntity
+	GetDeviceInfo() DeviceInfoHeaderRequest
 	GetToken() string
 }
 
 type requesterData struct {
-	UserId       string           `json:"user_id"`
-	Tid          string           `json:"tid"`
-	Role         int              `json:"role"`
-	LanguageCode string           `json:"language_code"`
-	DeviceInfo   DeviceInfoEntity `json:"device_info"`
-	Token        string           `json:"token"`
+	UserId       string                  `json:"user_id"`
+	Tid          string                  `json:"tid"`
+	Role         int                     `json:"role"`
+	LanguageCode string                  `json:"language_code"`
+	DeviceInfo   DeviceInfoHeaderRequest `json:"device_info"`
+	Token        string                  `json:"token"`
 }
 
-func NewRequester(userId, tid, languageCode, token string, role int, deviceInfo DeviceInfoEntity) *requesterData {
+func NewRequester(userId, tid, languageCode, token string, role int, deviceInfo DeviceInfoHeaderRequest) *requesterData {
 	return &requesterData{
 		UserId:       userId,
 		Tid:          tid,
@@ -51,7 +51,7 @@ func (r *requesterData) GetLanguageCode() string {
 	return r.LanguageCode
 }
 
-func (r *requesterData) GetDeviceInfo() DeviceInfoEntity {
+func (r *requesterData) GetDeviceInfo() DeviceInfoHeaderRequest {
 	return r.DeviceInfo
 }
 
