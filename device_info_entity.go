@@ -15,7 +15,7 @@ type DeviceInfoEntity struct {
 	AppVersion   string             `json:"app_version" bson:"app_version"`
 	FCMToken     string             `json:"fcm_token" bson:"fcm_token"`
 	LanguageCode string             `json:"language_code" bson:"language_code"`
-	Latitude     float32            `json:"lattitude" bson:"lattitude"`
+	Latitude     float32            `json:"latitude" bson:"latitude"`
 	Longitude    float32            `json:"longitude" bson:"longitude"`
 	CreatedAt    time.Time          `json:"created_at" bson:"created_at"`
 	UpdatedAt    time.Time          `json:"updated_at" bson:"updated_at"`
