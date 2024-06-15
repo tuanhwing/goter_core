@@ -8,11 +8,16 @@ import (
 )
 
 type RoleType int
+type GenderType string
 
 const (
 	AdminRole   RoleType = 20
 	ManagerRole RoleType = 10
 	GuestRole   RoleType = 0
+
+	MaleGenderType   GenderType = "male"
+	FemaleGenderType GenderType = "female"
+	OtherGenderType  GenderType = "other"
 )
 
 type FileEntity struct {
@@ -34,7 +39,7 @@ type UserEntity struct {
 	ID         primitive.ObjectID `bson:"_id" json:"id"`
 	Name       string             `json:"name"`
 	Address    string             `json:"address"`
-	Gender     string             `json:"gender"`
+	Gender     GenderType         `json:"gender"`
 	Avatar     string             `json:"avatar"`
 	RoleType   RoleType           `bson:"role_type" json:"role_type"`
 	DayOfBirth string             `bson:"day_of_birth" json:"day_of_birth"`
