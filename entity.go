@@ -20,6 +20,11 @@ const (
 	OtherGenderType  GenderType = "other"
 )
 
+type AuthorizationEntity struct {
+	AccessToken  string `json:"access_token"`
+	RefreshToken string `json:"refresh_token"`
+}
+
 type FileEntity struct {
 	Key          string `bson:"key" json:"key"`
 	Type         string `bson:"type" json:"type"` //value = image/video
@@ -46,6 +51,13 @@ type UserEntity struct {
 	Phone      PhoneNumber        `json:"phone"`
 	CreatedAt  time.Time          `bson:"created_at" json:"-"`
 	UpdatedAt  time.Time          `bson:"updated_at" json:"-"`
+}
+
+func NewAuthorization(accessToken, refreshToken string) *AuthorizationEntity {
+	return &AuthorizationEntity{
+		AccessToken:  accessToken,
+		RefreshToken: refreshToken,
+	}
 }
 
 // NewUser create a new user

@@ -77,3 +77,7 @@ func ParseDeviceInfo(s string) (DeviceInfoHeaderRequest, error) {
 	err := json.Unmarshal([]byte(s), &data)
 	return data, err
 }
+
+func GetUserKey(userId string) string {
+	return "user_" + userId
+}
