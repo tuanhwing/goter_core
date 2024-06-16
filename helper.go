@@ -81,3 +81,7 @@ func ParseDeviceInfo(s string) (DeviceInfoHeaderRequest, error) {
 func GetUserKey(userId string) string {
 	return "user_" + userId
 }
+
+func IsRefreshToken(path string) bool {
+	return strings.Contains(path, "/refreshToken")
+}
