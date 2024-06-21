@@ -78,8 +78,12 @@ func ParseDeviceInfo(s string) (DeviceInfoHeaderRequest, error) {
 	return data, err
 }
 
-func GetAuthenticationKey(userId string) string {
-	return "authentication_" + userId
+func GetAccessTokenKey(userId string) string {
+	return "goter_accesstoken_" + userId
+}
+
+func GetRefreshTokenKey(userId string) string {
+	return "goter_refreshtoken_" + userId
 }
 
 func IsRefreshToken(path string) bool {
