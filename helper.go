@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/go-redis/redis/v8"
 	"go.mongodb.org/mongo-driver/bson"
@@ -88,4 +89,10 @@ func GetRefreshTokenKey(userId string) string {
 
 func IsRefreshToken(path string) bool {
 	return strings.Contains(path, "/refreshToken")
+}
+
+func GetGMTTimeNow() time.Time {
+	now := time.Now()
+	gmtLocation := time.FixedZone("GMT", 0)
+	return now.In(gmtLocation)
 }
