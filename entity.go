@@ -13,6 +13,7 @@ type GenderType string
 const (
 	AdminRole   RoleType = 20
 	ManagerRole RoleType = 10
+	PremiumRole RoleType = 5
 	GuestRole   RoleType = 0
 
 	MaleGenderType   GenderType = "male"
