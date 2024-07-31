@@ -75,8 +75,8 @@ func NewUser(dialCode, phone string) (*UserEntity, error) {
 		Phone:     *p,
 		Name:      defaultName,
 		RoleType:  GuestRole,
-		CreatedAt: time.Now(),
-		UpdatedAt: time.Now(),
+		CreatedAt: GetGMTTimeNow(),
+		UpdatedAt: GetGMTTimeNow(),
 	}
 	err = u.Validate()
 	if err != nil {

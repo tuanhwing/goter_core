@@ -24,8 +24,8 @@ type DeviceInfoEntity struct {
 func NewEmptyDeviceInfo(userId primitive.ObjectID) *DeviceInfoEntity {
 	u := &DeviceInfoEntity{
 		UserID:    userId,
-		CreatedAt: time.Now(),
-		UpdatedAt: time.Now(),
+		CreatedAt: GetGMTTimeNow(),
+		UpdatedAt: GetGMTTimeNow(),
 	}
 
 	return u
@@ -48,8 +48,8 @@ func NewDeviceInfo(
 		LanguageCode: languageCode,
 		Latitude:     latitude,
 		Longitude:    longitude,
-		CreatedAt:    time.Now(),
-		UpdatedAt:    time.Now(),
+		CreatedAt:    GetGMTTimeNow(),
+		UpdatedAt:    GetGMTTimeNow(),
 	}
 	err := u.Validate()
 	if err != nil {
