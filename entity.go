@@ -47,18 +47,19 @@ type DeviceInfoHeaderRequest struct {
 }
 
 type UserEntity struct {
-	ID         primitive.ObjectID `bson:"_id" json:"id"`
-	Name       string             `json:"name"`
-	Address    string             `json:"address"`
-	Gender     GenderType         `json:"gender"`
-	Avatar     string             `json:"avatar"`
-	RoleType   RoleType           `bson:"role_type" json:"role_type"`
-	DayOfBirth string             `bson:"day_of_birth" json:"day_of_birth"`
-	Phone      PhoneNumber        `json:"phone"`
-	Email      string             `bson:"email" json:"email"`
-	LoginType  string             `bson:"login_type" json:"login_type"`
-	CreatedAt  time.Time          `bson:"created_at" json:"-"`
-	UpdatedAt  time.Time          `bson:"updated_at" json:"-"`
+	ID             primitive.ObjectID `bson:"_id" json:"id"`
+	FirebaseUserID string             `bson:"firebase_user_id" json:"firebase_user_id"`
+	Name           string             `json:"name"`
+	Address        string             `json:"address"`
+	Gender         GenderType         `json:"gender"`
+	Avatar         string             `json:"avatar"`
+	RoleType       RoleType           `bson:"role_type" json:"role_type"`
+	DayOfBirth     string             `bson:"day_of_birth" json:"day_of_birth"`
+	Phone          PhoneNumber        `json:"phone"`
+	Email          string             `bson:"email" json:"email"`
+	LoginType      string             `bson:"login_type" json:"login_type"`
+	CreatedAt      time.Time          `bson:"created_at" json:"-"`
+	UpdatedAt      time.Time          `bson:"updated_at" json:"-"`
 }
 
 func NewAuthorization(accessToken, refreshToken string) *AuthorizationEntity {
@@ -69,21 +70,22 @@ func NewAuthorization(accessToken, refreshToken string) *AuthorizationEntity {
 }
 
 // NewUser create a new user
-func NewUser(dialCode, phone, email, avatarUrl, loginType string) (*UserEntity, error) {
+func NewUser(dialCode, phone, email, avatarUrl, loginType, firebaseUID string) (*UserEntity, error) {
 	p, err := NewPhoneNumber(dialCode, phone)
 	if err != nil && loginType == PhoneType {
 		return nil, err
 	}
 
 	u := &UserEntity{
-		ID:        primitive.NewObjectID(),
-		Phone:     *p,
-		RoleType:  GuestRole,
-		Email:     email,
-		LoginType: loginType,
-		Avatar:    avatarUrl,
-		CreatedAt: GetGMTTimeNow(),
-		UpdatedAt: GetGMTTimeNow(),
+		ID:             primitive.NewObjectID(),
+		FirebaseUserID: firebaseUID,
+		Phone:          *p,
+		RoleType:       GuestRole,
+		Email:          email,
+		LoginType:      loginType,
+		Avatar:         avatarUrl,
+		CreatedAt:      GetGMTTimeNow(),
+		UpdatedAt:      GetGMTTimeNow(),
 	}
 	err = u.Validate()
 	if err != nil {
