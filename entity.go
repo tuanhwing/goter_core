@@ -19,6 +19,11 @@ const (
 	MaleGenderType   GenderType = "male"
 	FemaleGenderType GenderType = "female"
 	OtherGenderType  GenderType = "other"
+
+	PhoneType    string = "phone"
+	GoogleType   string = "google.com"
+	FacebookType string = "facebook.com"
+	AppleType    string = "apple.com"
 )
 
 type AuthorizationEntity struct {
@@ -50,6 +55,8 @@ type UserEntity struct {
 	RoleType   RoleType           `bson:"role_type" json:"role_type"`
 	DayOfBirth string             `bson:"day_of_birth" json:"day_of_birth"`
 	Phone      PhoneNumber        `json:"phone"`
+	Email      string             `bson:"email" json:"email"`
+	LoginType  string             `bson:"login_type" json:"login_type"`
 	CreatedAt  time.Time          `bson:"created_at" json:"-"`
 	UpdatedAt  time.Time          `bson:"updated_at" json:"-"`
 }
@@ -62,19 +69,19 @@ func NewAuthorization(accessToken, refreshToken string) *AuthorizationEntity {
 }
 
 // NewUser create a new user
-func NewUser(dialCode, phone string) (*UserEntity, error) {
+func NewUser(dialCode, phone, email, avatarUrl, loginType string) (*UserEntity, error) {
 	p, err := NewPhoneNumber(dialCode, phone)
-	defaultName := "Goter"
-
-	if err != nil {
+	if err != nil && loginType == PhoneType {
 		return nil, err
 	}
 
 	u := &UserEntity{
 		ID:        primitive.NewObjectID(),
 		Phone:     *p,
-		Name:      defaultName,
 		RoleType:  GuestRole,
+		Email:     email,
+		LoginType: loginType,
+		Avatar:    avatarUrl,
 		CreatedAt: GetGMTTimeNow(),
 		UpdatedAt: GetGMTTimeNow(),
 	}
