@@ -10,6 +10,7 @@ type Requester interface {
 	GetUserId() string
 	GetTokenId() string
 	GetRole() int
+	GetLoginType() string
 	GetLanguageCode() string
 	GetDeviceInfo() DeviceInfoHeaderRequest
 	GetToken() string
@@ -19,6 +20,7 @@ type requesterData struct {
 	UserId       string                  `json:"user_id"`
 	Tid          string                  `json:"tid"`
 	Role         int                     `json:"role"`
+	LoginType    string                  `json:"login_type"`
 	LanguageCode string                  `json:"language_code"`
 	DeviceInfo   DeviceInfoHeaderRequest `json:"device_info"`
 	Token        string                  `json:"token"`
@@ -45,6 +47,10 @@ func (r *requesterData) GetTokenId() string {
 
 func (r *requesterData) GetRole() int {
 	return r.Role
+}
+
+func (r *requesterData) GetLoginType() string {
+	return r.LoginType
 }
 
 func (r *requesterData) GetLanguageCode() string {
