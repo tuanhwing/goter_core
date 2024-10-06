@@ -72,8 +72,12 @@ func NewAuthorization(accessToken, refreshToken string) *AuthorizationEntity {
 // NewUser create a new user
 func NewUser(dialCode, phone, email, avatarUrl, loginType, firebaseUID string) (*UserEntity, error) {
 	p, err := NewPhoneNumber(dialCode, phone)
-	if err != nil && loginType == PhoneType {
+	if loginType == PhoneType && err != nil {
 		return nil, err
+	}
+
+	if p == nil {
+		p = &PhoneNumber{}
 	}
 
 	u := &UserEntity{
